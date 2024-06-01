@@ -36,11 +36,10 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div className="w-full flex flex-col gap-2 justify-end items-end sm:flex-row sm:justify-between py-3 sm:items-center ">
+			<div className="w-full flex justify-between items-center py-3 ">
 				<Button title="등록" style="w-[100px]" />
-
-				<div className="flex flex-wrap gap-2 justify-end items-center">
-					<p className="text-[#5A616A] text-sm mr-4 whitespace-nowrap leading-[16px] ">선택한 0건</p>
+				<div className="flex gap-2 justify-end items-center">
+					<span className="text-[#5A616A] text-sm mr-4 whitespace-nowrap leading-[16px] ">선택한 0건</span>
 					<SelectInput options={statusOption} onChangeHandler={() => console.log("status")} />
 					<Button onClick={() => console.log("save")} title="저장" style="w-[100px]" />
 				</div>
