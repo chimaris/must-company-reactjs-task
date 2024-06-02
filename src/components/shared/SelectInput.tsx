@@ -5,7 +5,7 @@ import { FaAngleUp, FaAngleDown } from "react-icons/fa6";
 
 type selectInputProps = {
 	options: selectOptionType[];
-	onChangeHandler: (e: selectOptionType) => void;
+	onChangeHandler?: (e: selectOptionType) => void;
 	style?: string;
 	outerStyle?: string;
 };

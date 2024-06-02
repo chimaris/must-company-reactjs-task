@@ -11,3 +11,12 @@ export interface IApplicationList {
 	승인일시: string;
 	관리자: string;
 }
+
+export type alertModalStateType = {
+	show: boolean;
+	text: string;
+	type?: "warn" | "success";
+	isCancellable?: boolean;
+	cancelAction?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+	approveAction?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+};
