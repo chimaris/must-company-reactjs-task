@@ -1,9 +1,9 @@
 import { Fragment, useState } from "react";
 import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/react";
-import { useMemeber } from "../../context/memberContext";
-import Button from "../shared/Button";
 import { FaCheck } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
+import { useMemeber } from "../../context/memberContext";
+import Button from "../shared/Button";
 import dot from "../../assets/must.svg";
 import { reasons } from "../../constants";
 
@@ -25,7 +25,11 @@ const RefusalForm = () => {
 			setAlertModalState({
 				text: `선택된 ${selectedData.length}명의 승인상태를 변경하시겠습니까?`,
 				isCancellable: true,
-				cancelAction: closeModal,
+				cancelAction: () => {
+					setSelectedData([]);
+					setAlertModalState({ show: false, text: "" });
+					setShowRejectionModal(false);
+				},
 				approveAction: () => {
 					setSelectedData([]);
 					setShowRejectionModal(false);
@@ -141,6 +145,7 @@ const RefusalForm = () => {
 					</div>
 				</div>
 			</Dialog>
+			ß
 		</Transition>
 	);
 };
