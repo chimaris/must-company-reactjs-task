@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Button from "../components/shared/Button";
 import SelectInput from "../components/shared/SelectInput";
@@ -13,6 +13,8 @@ import RefusalForm from "../components/modals/RefusalForm";
 import Pagination from "../components/Pagination";
 
 const Home = () => {
+	const [filter, setFilter] = useState("승인여부 전체");
+	const [sort, setSort] = useState("");
 	const {
 		applicationList,
 		setApplicationList,
@@ -28,14 +30,41 @@ const Home = () => {
 	} = useMemeber();
 
 	useEffect(() => {
-		let initial_data = data.slice(0, sizePerPage) as IApplicationList[];
-		setApplicationList(initial_data);
-		let temp = [];
-		for (let i = 1; i <= Math.ceil(data.length / sizePerPage); i++) {
-			temp.push(i);
+		let filteredData = data;
+
+		// Apply filter
+		if (filter !== "승인여부 전체") {
+			filteredData = data.filter((item) => item.승인여부 === filter);
 		}
+
+		// Apply sort
+		filteredData = filteredData.sort((a, b) => {
+			if (sort === "신청일시") {
+				return new Date(b.신청일시).getTime() - new Date(a.신청일시).getTime();
+			} else if (sort === "승인일시") {
+				const dateA = new Date(a.승인일시).getTime();
+				const dateB = new Date(b.승인일시).getTime();
+
+				// Handle invalid dates
+				if (isNaN(dateA) && isNaN(dateB)) return 0;
+				if (isNaN(dateA)) return 1;
+				if (isNaN(dateB)) return -1;
+
+				return dateB - dateA;
+			}
+			return 0;
+		});
+
+		// Apply pagination
+		let paginatedData = filteredData.slice(0, sizePerPage) as IApplicationList[];
+
+		setApplicationList(paginatedData);
+
+		let temp = [];
+		for (let i = 1; i <= Math.ceil(filteredData.length / sizePerPage); i++) temp.push(i);
+
 		setPages(temp);
-	}, [sizePerPage]);
+	}, [sizePerPage, filter, sort]);
 
 	const saveHandle = () => {
 		if (!selectedData.length) {
@@ -91,14 +120,14 @@ const Home = () => {
 						<SelectInput
 							options={filterOptions}
 							onChangeHandler={(e) => {
-								console.log("filter", e.value.toString());
+								setFilter(e.value.toString());
 							}}
 							style="w-[48%] md:w-[150px]"
 						/>
 						<SelectInput
 							options={sortOptions}
 							onChangeHandler={(e) => {
-								console.log(e.value.toString());
+								setSort(e.value.toString());
 							}}
 							style="w-[48%] md:w-[150px]"
 						/>

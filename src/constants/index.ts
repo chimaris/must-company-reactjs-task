@@ -34,11 +34,11 @@ export const filterOptions: selectOptionType[] = [
 export const sortOptions: selectOptionType[] = [
 	{
 		title: "신청일시순",
-		value: "신청일시순",
+		value: "신청일시",
 	},
 	{
 		title: "승인일시순",
-		value: "승인일시순",
+		value: "승인일시",
 	},
 ];
 
