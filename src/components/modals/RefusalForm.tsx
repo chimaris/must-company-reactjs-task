@@ -23,7 +23,7 @@ const reasons: IReasons[] = [
 const RefusalForm = () => {
 	const [checkedValue, setCheckedValue] = useState<string[]>([]);
 	const [reasonText, setReasonText] = useState<string>("");
-	const { setAlertModalState, setSelectedData, setShowRejectionModal, showRejectionModal } = useMemeber();
+	const { setAlertModalState, selectedData, setSelectedData, setShowRejectionModal, showRejectionModal } = useMemeber();
 
 	const closeModal = () => {
 		setShowRejectionModal(false);
@@ -36,7 +36,7 @@ const RefusalForm = () => {
 	const handleSubmit = () => {
 		if ((checkedValue.includes("직접입력") && reasonText) || checkedValue.length) {
 			setAlertModalState({
-				text: "선택된 2명의 승인상태를 변경하시겠습니까?",
+				text: `선택된 ${selectedData.length}명의 승인상태를 변경하시겠습니까?`,
 				isCancellable: true,
 				cancelAction: closeModal,
 				approveAction: () => {
@@ -48,7 +48,7 @@ const RefusalForm = () => {
 							text: "저장되었습니다.",
 							show: true,
 						});
-					}, 500);
+					}, 300);
 				},
 				show: true,
 			});

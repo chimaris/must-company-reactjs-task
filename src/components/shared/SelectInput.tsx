@@ -28,7 +28,7 @@ const SelectInput = ({ options, onChangeHandler, style = "", outerStyle = "" }: 
 								<ListboxOption
 									key={optionIdx}
 									className={({ active }) =>
-										`relative cursor-default select-none py-2 px-4 ${active ? "text-white bg-[#2A3958]/50" : "text-[#B1B4BB]"} ${
+										`relative cursor-default select-none py-2 px-4 ${active ? "!text-white bg-[#2A3958]/50" : "text-[#141F2D]"} ${
 											selected.value === option.value ? "!bg-[#2A3958] text-white" : ""
 										} `
 									}

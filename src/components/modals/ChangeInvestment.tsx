@@ -6,9 +6,9 @@ import { FaXmark } from "react-icons/fa6";
 import Button from "../shared/Button";
 import dot from "../../assets/must.svg";
 
-const FILE_SIZE_LIMIT = 10000000; // 10MB
+const FILE_SIZE_LIMIT = 100 * 1024 * 1024; // 100MB
 const MAX_FILE_COUNT = 10;
-const VALID_FILE_TYPES = ["image/jpeg", "image/jpg", "image/gif", "image/png", "application/pdf"];
+const VALID_FILE_TYPES = ["image/jpg", "image/jpeg", "image/gif", "image/png", "application/pdf"];
 
 const ChangeInvestment = () => {
 	const fileRef = useRef<HTMLInputElement>(null);
@@ -58,6 +58,41 @@ const ChangeInvestment = () => {
 		const newFiles = [...uploadedFiles];
 		newFiles.splice(index, 1);
 		setUploadedFiles(newFiles);
+	};
+
+	const handleSubmit = () => {
+		if (uploadedFiles.length > 0) {
+			setAlertModalState({
+				text: "투자유형을 변경하시겠습니까?",
+				isCancellable: true,
+				approveAction: () => {
+					setShowInvestModal(false);
+					setTimeout(() => {
+						setAlertModalState({
+							type: "success",
+							text: "저장되었습니다.",
+							show: true,
+						});
+					}, 300);
+				},
+				cancelAction: () => {
+					setShowInvestModal(false);
+					setTimeout(() => {
+						setAlertModalState({
+							type: "warn",
+							text: "파일 등록에 실패하였습니다.",
+							show: true,
+						});
+					}, 300);
+				},
+				show: true,
+			});
+		} else {
+			setAlertModalState({
+				text: "필수입력항목을 입력해주세요.",
+				show: true,
+			});
+		}
 	};
 
 	return (
@@ -159,7 +194,7 @@ const ChangeInvestment = () => {
 									</ul>
 								</div>
 								<div className="flex w-full py-6 justify-center gap-3">
-									<Button title="확인" onClick={closeModal} className="w-[160px] text-white" />
+									<Button title="확인" onClick={handleSubmit} className="w-[160px] text-white" />
 									<Button className="bg-transparent border border-[#2A3958] text-[#2A3958] w-[160px]" title="취소" onClick={closeModal} />
 								</div>
 							</DialogPanel>
