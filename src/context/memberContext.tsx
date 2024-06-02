@@ -18,6 +18,8 @@ interface MemberContextType {
 	setCurrentPage: (currentPage: number) => void;
 	applicationList: IApplicationList[];
 	setApplicationList: (applications: IApplicationList[]) => void;
+	sizePerPage: number;
+	setSizePerPage: (sizePerPage: number) => void;
 }
 
 const MemberContext = createContext<MemberContextType | undefined>(undefined);
@@ -35,6 +37,7 @@ export const MemberProvider = ({ children }: MemberProviderProps) => {
 	const [alertModalState, setAlertModalState] = useState<alertModalStateType>({ show: false, text: "" });
 	const [pages, setPages] = useState<number[]>([]);
 	const [currentPage, setCurrentPage] = useState<number>(1);
+	const [sizePerPage, setSizePerPage] = useState<number>(50);
 
 	return (
 		<MemberContext.Provider
@@ -55,6 +58,8 @@ export const MemberProvider = ({ children }: MemberProviderProps) => {
 				setCurrentPage,
 				applicationList,
 				setApplicationList,
+				sizePerPage,
+				setSizePerPage,
 			}}>
 			{children}
 		</MemberContext.Provider>

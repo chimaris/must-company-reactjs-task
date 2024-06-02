@@ -20,3 +20,8 @@ export type alertModalStateType = {
 	cancelAction?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 	approveAction?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 };
+
+export interface IReasons {
+	id: string;
+	label: string;
+}

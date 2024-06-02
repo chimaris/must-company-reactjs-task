@@ -5,20 +5,7 @@ import Button from "../shared/Button";
 import { FaCheck } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import dot from "../../assets/must.svg";
-
-interface IReasons {
-	id: string;
-	label: string;
-}
-
-const reasons: IReasons[] = [
-	{ id: "서류식별불가", label: "서류 식별 불가" },
-	{ id: "필수서류누락", label: "필수 서류 누락" },
-	{ id: "서류의내용이등록된회원정보와다름", label: "서류의 내용이 등록된 회원정보와 다름" },
-	{ id: "서류에", label: "서류에 누락된 내용이 있음 (필수정보, 회사직인, 본인날인, 본인서명 등)" },
-	{ id: "유효기간이", label: "서류의 유효기간이 초과됨" },
-	{ id: "직접입력", label: "직접 입력" },
-];
+import { reasons } from "../../constants";
 
 const RefusalForm = () => {
 	const [checkedValue, setCheckedValue] = useState<string[]>([]);

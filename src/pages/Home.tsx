@@ -23,17 +23,19 @@ const Home = () => {
 		setAlertModalState,
 		selectedData,
 		setSelectedData,
+		setSizePerPage,
+		sizePerPage,
 	} = useMemeber();
 
 	useEffect(() => {
-		let initial_data = data.slice(0, 50) as IApplicationList[];
+		let initial_data = data.slice(0, sizePerPage) as IApplicationList[];
 		setApplicationList(initial_data);
 		let temp = [];
-		for (let i = 1; i <= Math.ceil(data.length / 50); i++) {
+		for (let i = 1; i <= Math.ceil(data.length / sizePerPage); i++) {
 			temp.push(i);
 		}
 		setPages(temp);
-	}, []);
+	}, [sizePerPage]);
 
 	const saveHandle = () => {
 		if (!selectedData.length) {
@@ -103,7 +105,7 @@ const Home = () => {
 						<SelectInput
 							options={limitOptions}
 							onChangeHandler={(e) => {
-								console.log(parseInt(e.value.toString()));
+								setSizePerPage(parseInt(e.value.toString()));
 							}}
 							style="w-full md:w-[150px]"
 						/>

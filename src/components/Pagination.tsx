@@ -3,10 +3,8 @@ import { useMemeber } from "../context/memberContext";
 import data from "../data/data";
 import { IApplicationList } from "../utils/types";
 
-const NUM_PER_PAGE = 50;
-
 const Pagination = () => {
-	const { setApplicationList, pages, currentPage, setCurrentPage } = useMemeber();
+	const { setApplicationList, pages, currentPage, setCurrentPage, sizePerPage } = useMemeber();
 
 	const goToPreviousPage = () => {
 		if (currentPage > 1) {
@@ -27,11 +25,13 @@ const Pagination = () => {
 	const goToLastPage = () => {
 		setPage(pages.length);
 	};
+
 	const setPage = (page: number) => {
-		let initial_data = data.slice((page - 1) * NUM_PER_PAGE, page * NUM_PER_PAGE) as IApplicationList[];
+		let initial_data = data.slice((page - 1) * sizePerPage, page * sizePerPage) as IApplicationList[];
 		setApplicationList(initial_data);
 		setCurrentPage(page);
 	};
+
 	return (
 		<div className="bg-gray-100 py-2 px-1 md:px-5 flex justify-center w-full">
 			<div className="text-sm md:text-xl flex items-center flex-wrap h-auto">
