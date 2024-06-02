@@ -1,22 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "../components/Header";
 import Button from "../components/shared/Button";
 import SelectInput from "../components/shared/SelectInput";
 import { filterOptions, limitOptions, sortOptions, statusOption } from "../constants";
 import data from "../data/data";
-import { FaAngleLeft, FaAngleRight, FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 import { IApplicationList } from "../utils/types";
 import ChangeInvestment from "../components/modals/ChangeInvestment";
 import { useMemeber } from "../context/memberContext";
 import Alert from "../components/modals/Alert";
 import RefusalForm from "../components/modals/RefusalForm";
+import Pagination from "../components/Pagination";
 
 const Home = () => {
-	const [applicationList, setApplicationList] = useState<IApplicationList[]>([]);
-	const [pages, setPages] = useState<number[]>([]);
-	const [currentPage, setCurrentPage] = useState<number>(1);
-	const { setShowInvestModal, setShowRejectionModal, alertModalState, setAlertModalState, selectedData, setSelectedData } = useMemeber();
+	const {
+		applicationList,
+		setApplicationList,
+		setPages,
+		setShowInvestModal,
+		setShowRejectionModal,
+		alertModalState,
+		setAlertModalState,
+		selectedData,
+		setSelectedData,
+	} = useMemeber();
 
 	useEffect(() => {
 		let initial_data = data.slice(0, 50) as IApplicationList[];
@@ -27,32 +34,6 @@ const Home = () => {
 		}
 		setPages(temp);
 	}, []);
-
-	const goToPreviousPage = () => {
-		if (currentPage > 1) {
-			setPage(currentPage - 1);
-		}
-	};
-
-	const goToNextPage = () => {
-		if (currentPage < pages.length) {
-			setPage(currentPage + 1);
-		}
-	};
-
-	const goToFirstPage = () => {
-		setPage(1);
-	};
-
-	const goToLastPage = () => {
-		setPage(pages.length);
-	};
-
-	const setPage = (page: number) => {
-		let initial_data = data.slice((page - 1) * 50, page * 50) as IApplicationList[];
-		setApplicationList(initial_data);
-		setCurrentPage(page);
-	};
 
 	const saveHandle = () => {
 		if (!selectedData.length) {
@@ -93,9 +74,9 @@ const Home = () => {
 			<ChangeInvestment />
 			<RefusalForm />
 			<Alert />
-			<div className="w-[80%] mx-auto my-4">
+			<div className="w-[95%] md:w-[80%] mx-auto my-4">
 				<Header />
-				<div className="flex gap-2 justify-between items-center border-b border-[#D7D8DA] py-3 mt-10 ">
+				<div className="flex flex-col md:flex-row gap-2 justify-between items-center border-b border-[#D7D8DA] py-3 mt-10 ">
 					<div className="flex justify-start items-center gap-2">
 						<h2 className="font-semibold text-xl text-[#0B101A] ">신청 목록</h2>
 						<p className="font-medium text-sm leading-4 text-[#5A616A]">
@@ -104,38 +85,52 @@ const Home = () => {
 							건)
 						</p>
 					</div>
-					<div className="flex flex-wrap justify-start items-center gap-1 ">
+					<div className="flex flex-wrap justify-between md:justify-start items-center gap-1 ">
 						<SelectInput
 							options={filterOptions}
 							onChangeHandler={(e) => {
 								console.log("filter", e.value.toString());
 							}}
+							style="w-[48%] md:w-[150px]"
 						/>
 						<SelectInput
 							options={sortOptions}
 							onChangeHandler={(e) => {
 								console.log(e.value.toString());
 							}}
+							style="w-[48%] md:w-[150px]"
 						/>
 						<SelectInput
 							options={limitOptions}
 							onChangeHandler={(e) => {
 								console.log(parseInt(e.value.toString()));
 							}}
+							style="w-full md:w-[150px]"
 						/>
 					</div>
 				</div>
 
-				<div className="w-full flex justify-between items-center py-3 ">
-					<Button title="등록" style="w-[100px]" onClick={() => setShowInvestModal(true)} />
+				<div className="hidden md:flex justify-between items-center py-3 ">
+					<Button title="등록" className="w-[100px] text-white" onClick={() => setShowInvestModal(true)} />
 					<div className="flex gap-2 justify-end items-center">
 						<span className="text-[#5A616A] text-sm mr-4 whitespace-nowrap leading-[16px]">선택한 {selectedData.length}건</span>
 						<SelectInput options={statusOption} onChangeHandler={() => console.log("status")} />
-						<Button onClick={saveHandle} title="저장" style="w-[100px]" />
+						<Button onClick={saveHandle} title="저장" className="w-[100px] text-white" />
+					</div>
+				</div>
+				{/* Mobile view */}
+				<div className="flex flex-col items-center gap-4 py-3 md:hidden ">
+					<div className="flex justify-between items-center">
+						<span className="text-[#5A616A] text-sm mr-4 whitespace-nowrap leading-[16px]">선택한 {selectedData.length}건</span>
+						<SelectInput options={statusOption} onChangeHandler={() => console.log("status")} />
+					</div>
+					<div className="grid grid-cols-2 gap-2 w-full">
+						<Button title="등록" className="w-[100%] text-white" onClick={() => setShowInvestModal(true)} />
+						<Button title="저장" className="w-[100%] text-white" onClick={saveHandle} />
 					</div>
 				</div>
 
-				<div className="w-full overflow-x-auto">
+				<div className="w-full overflow-x-auto mt-5 md:mt-0">
 					<table className="border-collapse table-fixed">
 						<thead>
 							<tr className="h-15">
@@ -233,34 +228,7 @@ const Home = () => {
 					</table>
 				</div>
 
-				{applicationList.length > 0 && (
-					<div className="bg-gray-100 py-2 px-5 flex justify-center">
-						<div className="h-10 text-xl flex items-center">
-							<button className="text-xl rounded bg-transparent text-gray-400 p-4 flex justify-center items-center" onClick={goToFirstPage}>
-								<FaAnglesLeft />
-							</button>
-							<button className="text-xl rounded bg-transparent text-gray-400 p-4 flex justify-center items-center" onClick={goToPreviousPage}>
-								<FaAngleLeft />
-							</button>
-							{pages.map((page) => (
-								<button
-									key={page}
-									className={`w-10 h-10 border-none mx-2 p-4 rounded text-base font-bold flex justify-center items-center ${
-										page === currentPage ? "text-[#F5F5F5] bg-[#2A3958] p-2 text-[20px] " : "text-[#A1A1A1]"
-									}`}
-									onClick={() => setPage(page)}>
-									{page}
-								</button>
-							))}
-							<button className="p-4 text-xl rounded bg-transparent text-gray-400 flex justify-center items-center" onClick={goToNextPage}>
-								<FaAngleRight />
-							</button>
-							<button className="text-xl rounded bg-transparent text-gray-400 p-4 flex justify-center items-center" onClick={goToLastPage}>
-								<FaAnglesRight />
-							</button>
-						</div>
-					</div>
-				)}
+				{applicationList.length > 0 && <Pagination />}
 			</div>
 		</>
 	);

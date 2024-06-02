@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import { alertModalStateType } from "../utils/types";
+import { alertModalStateType, IApplicationList } from "../utils/types";
 
 interface MemberContextType {
 	showInvestModal: boolean;
@@ -12,6 +12,12 @@ interface MemberContextType {
 	setUploadedFiles: (uploadedFiles: File[]) => void;
 	selectedData: string[];
 	setSelectedData: (selectedData: string[]) => void;
+	pages: number[];
+	setPages: (pages: number[]) => void;
+	currentPage: number;
+	setCurrentPage: (currentPage: number) => void;
+	applicationList: IApplicationList[];
+	setApplicationList: (applications: IApplicationList[]) => void;
 }
 
 const MemberContext = createContext<MemberContextType | undefined>(undefined);
@@ -21,11 +27,14 @@ interface MemberProviderProps {
 }
 
 export const MemberProvider = ({ children }: MemberProviderProps) => {
+	const [applicationList, setApplicationList] = useState<IApplicationList[]>([]);
 	const [showInvestModal, setShowInvestModal] = useState(false);
 	const [showRejectionModal, setShowRejectionModal] = useState(false);
 	const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 	const [selectedData, setSelectedData] = useState<string[]>([]);
 	const [alertModalState, setAlertModalState] = useState<alertModalStateType>({ show: false, text: "" });
+	const [pages, setPages] = useState<number[]>([]);
+	const [currentPage, setCurrentPage] = useState<number>(1);
 
 	return (
 		<MemberContext.Provider
@@ -40,6 +49,12 @@ export const MemberProvider = ({ children }: MemberProviderProps) => {
 				setUploadedFiles,
 				selectedData,
 				setSelectedData,
+				pages,
+				setPages,
+				currentPage,
+				setCurrentPage,
+				applicationList,
+				setApplicationList,
 			}}>
 			{children}
 		</MemberContext.Provider>

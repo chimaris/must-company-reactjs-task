@@ -4,6 +4,7 @@ import { useMemeber } from "../../context/memberContext";
 import Button from "../shared/Button";
 import { FaCheck } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
+import dot from "../../assets/must.svg";
 
 interface IReasons {
 	id: string;
@@ -83,30 +84,38 @@ const RefusalForm = () => {
 							leave="ease-in duration-200"
 							leaveFrom="opacity-100 scale-100"
 							leaveTo="opacity-0 scale-95">
-							<DialogPanel className="w-[800px] flex flex-col justify-start items-start transform rounded-xl shadow-[#1018281A]/10 bg-white text-left align-middle shadow-xl transition-all">
+							<DialogPanel
+								className="w-[800px] flex flex-col justify-start items-start transform rounded-xl bg-white text-left align-middle shadow-xl transition-all"
+								style={{
+									boxShadow: "0px 8px 8px -4px #1018280A, 0px 20px 24px -4px #1018281A",
+								}}>
 								<div className="w-full flex justify-between items-center p-6 pb-5 ">
 									<h4 className="">승인거부 사유 입력</h4>
 
 									<FaXmark onClick={closeModal} className="text-2xl cursor-pointer" />
 								</div>
-								<div className="py-5 px-6 w-full border-y border-[#D7D8DA] ">
+								<div className="px-2 md:px-6 py-5 w-full border-y border-[#D7D8DA] ">
 									<div className="w-full border border-[#D7D8DA] mb-3 flex flex-col justify-start items-start ">
 										<div className="w-full flex flex-row justify-start items-start text-[#0B101A] ">
-											<p className="w-[21.27%] text-base leading-none font-medium p-4 bg-[#EEF0F4] border-b border-b-white ">회원번호</p>
-											<p className="text-sm leading-4 w-[78.72%] flex flex-row flex-wrap py-4 px-5 bg-white border-b border-b-[#D7D8DA] ">
+											<p className="w-[21.27%] text-sm md:text-base leading-none font-medium py-4 px-2 md:px-4 bg-[#EEF0F4] border-b border-b-white ">
+												회원번호
+											</p>
+											<p className="text-xs md:text-sm leading-4 w-[78.72%] flex flex-row flex-wrap py-4 px-5 bg-white border-b border-b-[#D7D8DA] ">
 												abc111, abc111, abc111, abc111, abc111
 											</p>
 										</div>{" "}
 										<div className="w-full flex flex-row justify-start items-start text-[#0B101A] ">
-											<p className="w-[21.27%] text-base leading-none font-medium p-4 bg-[#EEF0F4] border-b border-b-white ">회원명/법인명</p>
+											<p className="w-[21.27%] text-base leading-none font-medium py-4 px-2 md:px-4 bg-[#EEF0F4] border-b border-b-white ">
+												회원명/법인명
+											</p>
 											<p className="text-sm leading-4 w-[78.72%] flex flex-row flex-wrap py-4 px-5 bg-white border-b border-b-[#D7D8DA] ">
 												김길동, ㈜가나다라투자
 											</p>
 										</div>
 										<div className="w-full flex flex-row justify-start relative items-start text-[#0B101A] ">
-											<div className="w-[21.27%] flex items-center absolute h-full inset-y-0 justify-left text-base leading-none font-medium p-4 bg-[#EEF0F4] ">
-												<p className="">승인거부 사유</p>
-												<span className="-mt-1 ml-1">0</span>
+											<div className="w-[21.27%] flex items-center absolute h-full inset-y-0 justify-left text-base leading-none font-medium py-4 px-2 md:px-4 bg-[#EEF0F4] ">
+												<p>승인거부 사유</p>
+												<img src={dot} alt="dot" className="-mt-8 md:-mt-4 md:ml-1" />
 											</div>
 											<div className="w-[78.72%] ml-auto gap-2 flex flex-col justify-start items-start flex-wrap px-5 py-4 bg-white">
 												{reasons.map(({ id, label }) => (
@@ -119,10 +128,10 @@ const RefusalForm = () => {
 															onChange={() => handleCheckboxChange(id)}
 															className="opacity-0 absolute w-0 h-0 peer"
 														/>
-														<span className="w-4 h-4 flex mx-auto rounded bg-white text-white shadow border border-[#D7D8DA] peer-checked:border-[#2A3958] peer-checked:bg-[#2A3958]">
+														<span className="min-w-5 min-h-5 flex mx-auto rounded-md bg-white text-white shadow border border-[#D7D8DA] peer-checked:border-[#2A3958] peer-checked:bg-[#2A3958]">
 															<FaCheck className="m-auto text-[10px]" />
 														</span>
-														<p className="text-sm text-[#0B101A]">{label}</p>
+														<p className="text-xs md:text-sm text-[#0B101A]">{label}</p>
 													</label>
 												))}
 												<textarea
@@ -137,8 +146,8 @@ const RefusalForm = () => {
 									</div>
 								</div>
 								<div className="flex w-full py-6 justify-center gap-3 ">
-									<Button title="확인" onClick={handleSubmit} />
-									<Button title="취소" onClick={closeModal} />
+									<Button title="확인" onClick={handleSubmit} className="w-[160px] text-white" />
+									<Button title="취소" onClick={closeModal} className="bg-transparent border border-[#2A3958] text-[#2A3958] w-[160px]" />
 								</div>
 							</DialogPanel>
 						</TransitionChild>

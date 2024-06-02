@@ -1,12 +1,12 @@
 type buttonProps = {
 	title: string;
 	onClick?: () => void;
-	style?: string;
+	className?: string;
 };
 
-const Button = ({ title, onClick, style }: buttonProps) => {
+const Button = ({ title, onClick, className }: buttonProps) => {
 	return (
-		<button className={`rounded-[10px] p-2 bg-[#2A3958] text-white ${style && style}`} onClick={onClick} type="button">
+		<button className={`rounded-[10px] p-2 bg-[#2A3958] ${className && className}`} onClick={onClick} type="button">
 			{title}
 		</button>
 	);
