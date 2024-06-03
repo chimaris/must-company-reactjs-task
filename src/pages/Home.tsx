@@ -52,7 +52,7 @@ const Home = () => {
 				<div className="hidden md:flex justify-between items-center py-3 ">
 					<Button title="등록" className="w-[100px] text-white" onClick={() => setShowInvestModal(true)} />
 					<div className="flex gap-2 justify-end items-center">
-						<span className="text-[#5A616A] text-sm mr-4 whitespace-nowrap leading-[16px]">선택한 {selectedData.length}건</span>
+						<span className="text-[#5A616A] font-medium text-sm mr-4 whitespace-nowrap leading-[16px]">선택한 {selectedData.length}건</span>
 						<SelectInput options={statusOption} onChangeHandler={() => console.log("status")} />
 						<Button onClick={saveHandle} title="저장" className="w-[100px] text-white" />
 					</div>
@@ -60,8 +60,8 @@ const Home = () => {
 				{/* Mobile view */}
 				<div className="flex flex-col items-center gap-4 py-3 md:hidden ">
 					<div className="flex justify-between items-center">
-						<span className="text-[#5A616A] text-sm mr-4 whitespace-nowrap leading-[16px]">선택한 {selectedData.length}건</span>
-						<SelectInput options={statusOption} onChangeHandler={() => console.log("status")} />
+						<span className="text-[#5A616A] font-medium text-sm mr-4 whitespace-nowrap leading-[16px]">선택한 {selectedData.length}건</span>
+						<SelectInput options={statusOption} onChangeHandler={() => console.log(" change status")} />
 					</div>
 					<div className="grid grid-cols-2 gap-2 w-full">
 						<Button title="등록" className="w-[100%] text-white" onClick={() => setShowInvestModal(true)} />

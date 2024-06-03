@@ -1,30 +1,34 @@
-# React + TypeScript + Vite
+# HTML-CSS Perfection
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I make all design components, header, footer and one whole page perfect. I also implemented some features like pagination, sorting, filtering etc.
 
-Currently, two official plugins are available:
+Here are the Figma, Netlify, Loom vidoe Links:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Figma Link](https://www.figma.com/design/39BD1p2kGVFCcTxcuUAJwb/HTML-CSS-perfection?node-id=1-380&t=UbZMjlWBKaR1zUOI-0)
+- [Netlify Link](https://html-css-perfection-stellamaris.netlify.app)
+- [Loom Video Link](https://html-css-perfection-stellamaris.netlify.app)
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Before you begin, ensure you have met the following requirements:
 
-- Configure the top-level `parserOptions` property like this:
+- Node.js installed on your machine.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Installation
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Clone the Repository and change direcory to the root
+2. Install Packages `yarn`in root dir
+3. Run `yarn run dev`
+
+Runs the application in dev mode, enable hot restart and allows for quick modification
+
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
+
+## Technologies Used
+
+1. ReactJs
+2. Typescript
+3. Tailwind CSS
+4. ContextAPI (State management)
+
+## Thank you
