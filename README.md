@@ -6,7 +6,7 @@ Here are the Figma, Netlify, Loom vidoe Links:
 
 - [Figma Link](https://www.figma.com/design/39BD1p2kGVFCcTxcuUAJwb/HTML-CSS-perfection?node-id=1-380&t=UbZMjlWBKaR1zUOI-0)
 - [Netlify Link](https://html-css-perfection-stellamaris.netlify.app)
-- [Loom Video Link](https://www.loom.com/share/ebbc1e3d09fd458fbf17ddb68f8fd47f?sid=201352ca-7742-46d4-9f03-f6af89282ddb)
+
 
 ## Prerequisites
 
